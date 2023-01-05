@@ -128,6 +128,7 @@ class MainScreenState extends ConsumerState<MainScreen> {
                         ref
                             .read(symbolsForStocksProvider.notifier)
                             .update((state) => symbols.value![index].symbol!);
+                            
                         ref.invalidate(fetchStocksProvider(ref));
                       },
                       child: Tab(
