@@ -1,5 +1,4 @@
 <div align="center">
-  <img src="./assets/logo.png" style="margin: auto;display: block; width: 200" />
    <img src="./assets/logo.png" width="200"  />
   <br />
   <h1>QwikCountr Demo</h1>
