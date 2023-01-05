@@ -1,5 +1,5 @@
 name: qwikcountr_tech_assessment
-description: A new Flutter project.
+description: A Flutter app that displays stock market data and allows users to track their favorite stocks.
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
