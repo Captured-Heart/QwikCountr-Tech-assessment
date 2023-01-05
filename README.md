@@ -5,10 +5,12 @@
   <strong>A Flutter app that displays stock market data and allows users to track their favorite stocks.</strong>
   <br />
 
-  <h3>You can download the apk directly from my firebase distribution console <a href="https://appdistribution.firebase.dev/i/e5a7b73fefe2dd61">QwikCountr-Demo</a></ </h3>
+<sub>Built by <a href="https://twitter.com/CapturedWarrior">Captured-Heart</a></sub>
+<br />
+
+  <i><h3>You can download the apk directly from my firebase distribution console <a href="https://appdistribution.firebase.dev/i/e5a7b73fefe2dd61">QwikCountr-Demo</a></ </h3></i>
   <br />
 
-<sub>Built by <a href="https://twitter.com/CapturedWarrior">Captured-Heart</a></sub>
 <br />
 
 </div>
