@@ -1,4 +1,4 @@
-import 'package:qwikcountr_tech_assessment/mainscreen/services/fetch_symbols.dart';
+import 'package:qwikcountr_tech_assessment/mainscreen/services/fetch_symbols_repo.dart';
 
 import '../../app.dart';
 

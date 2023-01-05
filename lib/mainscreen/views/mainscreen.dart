@@ -1,19 +1,13 @@
-// import 'package:dropdown_search/dropdown_search.dart';
-
-import 'dart:async';
 import 'dart:developer';
 
-import 'package:qwikcountr_tech_assessment/mainscreen/providers/fetch_symbols_provider.dart';
-import 'package:qwikcountr_tech_assessment/mainscreen/services/http_get_request.dart';
-import 'package:qwikcountr_tech_assessment/utils/connectivity.dart';
-import 'package:qwikcountr_tech_assessment/utils/snack_bar.dart';
-
 import '../../app.dart';
-import '../services/fetch_symbols.dart';
 
-final activeTabIndexProvider = StateProvider<int>((ref) {
-  return 0;
+final symbolsForStocksProvider = StateProvider<String>((ref) {
+  return '';
 });
+// final symbolsForStocksIndexProvider = StateProvider<int>((ref) {
+//   return 0;
+// });
 
 class MainScreen extends ConsumerStatefulWidget {
   static const String routeName = 'mainScreen';
@@ -25,34 +19,31 @@ class MainScreen extends ConsumerStatefulWidget {
 
 class MainScreenState extends ConsumerState<MainScreen> {
   @override
-  initState() {
-    // HttpRequestHelper.getSymbols();
-
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final symbols = ref.watch(fetchSymbolsProvider);
-    final symbolsLength = symbols.valueOrNull?.length ?? 3;
+    final stocks = ref.watch(fetchStocksProvider(ref));
+    final isGrid = ref.watch(isGridViewProvider);
+    final symbolsLength = symbols.value?.length ?? 3;
+
+    // UTILIZING THE RIVERPOD PACKAGE, I COULD LISTEN TO MY INTERNET STREAMS IN THE BUILD METHOD, TO DETECT ANY CHANGES WITH THE NETWORK
     ref.listen(checkInternetStatusProvider, (previous, next) {
       next.value!.listen((event) {
         switch (event) {
           case InternetConnectionStatus.connected:
             topSnack(
                 context: context,
-                message: 'Internet network is healthy',
+                message: internetHealthy,
                 isError: false);
             log('Data connection is available.');
             break;
           case InternetConnectionStatus.disconnected:
             topSnack(
                 context: context,
-                message: 'You are disconnected from the internet.',
+                message: internetUnhealthy,
                 isError: true);
 
-            log('You are disconnected from the internet.');
+            log(internetUnhealthy);
             break;
         }
       });
@@ -60,50 +51,45 @@ class MainScreenState extends ConsumerState<MainScreen> {
     return SafeArea(
       child: DefaultTabController(
         length: symbolsLength,
-        initialIndex: 0,
         child: Scaffold(
+          //Appbar begins here
           appBar: AppBar(
             elevation: 0,
             automaticallyImplyLeading: false,
             title: Text(SharedPreferencesHelper.getPrefName(),
                 style: GoogleFonts.carroisGothicSc()),
             actions: [
-              SearchBarAnimation(
-                textEditingController: TextEditingController(),
-                isOriginalAnimation: true,
-                searchBoxWidth: size.width * 0.7,
-                isSearchBoxOnRightSide: true,
-                textAlignToRight: false,
-                buttonBorderColour: Theme.of(context).primaryColorLight,
-                buttonColour: Theme.of(context).primaryColorLight,
-                enableBoxShadow: false,
-                enableButtonShadow: false,
-                searchBoxBorderColour: Theme.of(context).primaryColorLight,
-                searchBoxColour: Theme.of(context).primaryColorDark,
-                cursorColour: Theme.of(context).primaryColorLight,
-                buttonWidget: const Icon(Icons.search),
-                trailingWidget: const Icon(Icons.search),
-                secondaryButtonWidget: const Icon(Icons.dangerous),
-                onFieldSubmitted: (String value) {
-                  debugPrint('onFieldSubmitted value $value');
-                },
-              ),
+              searchBTN(size, context),
+
+              // LOG OUT BUTTON
               GestureDetector(
                 onTap: () async {
-                  // await FetchSymbolsRepository.getSymbolsRequest();
+                  //A DIALOG TO WARN USER FROM SIGNING OUT
+                  warningDialog(
+                    context: context,
+                    contentText: aboutToLogOutText,
+                    titleText: warning,
+                    onNegativeClick: () => Navigator.of(context).pop(),
+                    onPositiveClick: () {
+                      //HERE, I BASICALLY ERASE THE STORED VALUE FOR THE USER, SO ON SUBSQUENT LOGIN, HE WILL BE DIRECTED TO THE AUTH PAGE
+                      SharedPreferencesHelper.clearPrefs();
+                      pushReplacement(context, LoginScreen());
+                    },
+                  );
                 },
-                child: const CircleAvatar(
-                  child: Icon(Icons.notifications),
+                child: roundedMainBTN(
+                  message: logout,
+                  icon: Icons.power_settings_new,
                 ),
               ),
               const SizedBox(
-                width: 15,
+                width: 6,
               )
             ]
                 .expand((element) => [
                       element,
                       const SizedBox(
-                        width: 10,
+                        width: 15,
                       )
                     ])
                 .toList(),
@@ -129,26 +115,80 @@ class MainScreenState extends ConsumerState<MainScreen> {
                         : Colors.transparent,
                   ),
                   onTap: (value) {
-                    ref
-                        .read(activeTabIndexProvider.notifier)
-                        .update((state) => value);
                     log(value.toString());
                   },
+
+                  // THE TABS REP THE LIST FETCHED FROM EXCHANGES/COMPANIES FROM THE MARKETSTACK API
                   tabs: List.generate(
                     symbolsLength,
-                    (index) => GestureDetector(
-                      onTap: () {
-                        log(symbols.value![index].mic!);
+                    (index) => InkWell(
+                      radius: 150,
+                      onTap: () async {
+                        log(symbols.value![index].symbol!);
+                        ref
+                            .read(symbolsForStocksProvider.notifier)
+                            .update((state) => symbols.value![index].symbol!);
+                        ref.invalidate(fetchStocksProvider(ref));
                       },
                       child: Tab(
-                        child: Text(symbols.value?[index].mic ?? 'Loading...'),
-                      ),
+                          text: symbols.value?[index].symbol ?? 'Loading...'),
                     ),
+                    growable: true,
                   ),
                 ),
-                const Text('Market movers'),
-                stocksListTileCard(size, context),
-                stocksGridTileCard(size, context)
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      const Text(
+                       stockMarket,
+                        textScaleFactor: 1.4,
+                      ),
+                      const Spacer(),
+                      //DATE PICKER
+                      GestureDetector(
+                          onTap: () {
+                            datePicker(
+                                context: context, setState: setState, ref: ref);
+                          },
+                          child: roundedMainBTN(
+                            message:pickDate,
+                            icon: Icons.calendar_month,
+                          )),
+
+                      // GRIDVIEW / LISTVIEW SELECTOR
+                      GestureDetector(
+                        onTap: () {
+                          ref
+                              .read(isGridViewProvider.notifier)
+                              .update((state) => !state);
+                          log(ref.watch(isGridViewProvider).toString());
+                        },
+                        child: isGrid == true
+                            ? roundedMainBTN(
+                                message: gridView,
+                                icon: Icons.grid_view,
+                              )
+                            : roundedMainBTN(
+                                message: listView,
+                                icon: Icons.list,
+                              ),
+                      ),
+                    ]
+                        .expand((element) => [
+                              element,
+                              const SizedBox(
+                                width: 20,
+                              )
+                            ])
+                        .toList(),
+                  ),
+                ),
+
+                // STOCKS ARE DISPLAYED HERE
+                stocksListGridWIdget(stocks, isGrid, size),
               ],
             ),
           ),

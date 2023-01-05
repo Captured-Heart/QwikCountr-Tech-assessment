@@ -1,0 +1,15 @@
+const projectTitle = 'QwuikCountr Demo';
+const search = 'Search';
+const loginTitle = 'Provide a name to continue';
+const loginErrorText = 'please complete field';
+const login = 'Login';
+const name = 'Name';
+const internetHealthy = 'Internet network is healthy';
+const internetUnhealthy = 'You are disconnected from the internet.';
+const aboutToLogOutText = 'You are about to log out, are you sure?';
+const warning = 'Warning';
+const logout = 'Log-out';
+const stockMarket = 'Stock Market';
+const pickDate = 'Pick date-range';
+const gridView = 'Grid-View';
+const listView = 'List-View';

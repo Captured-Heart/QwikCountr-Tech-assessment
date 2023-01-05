@@ -1,21 +1,8 @@
 import '../app.dart';
 
-void snack(BuildContext context, String message, {bool errorTrue = false}) =>
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        behavior: SnackBarBehavior.floating,
-        clipBehavior: Clip.none,
-        backgroundColor:
-            errorTrue ? BrandColors.colorError : BrandColors.colorGreen,
-        content: Text(
-          message,
-          style: Theme.of(context).textTheme.subtitle1?.copyWith(
-              color: Colors.white, fontSize: 13, fontWeight: FontWeight.w400),
-        ),
-        duration: const Duration(milliseconds: 1500),
-      ),
-    );
 
+
+// THIS SNACK BAR WAS BUILT FOR THE CASE OF THE INTERNET STREAMS, IT COULD BE UTILIZED FOR OTHER PURPOSES.
 void topSnack({
   required BuildContext context,
   required String message,

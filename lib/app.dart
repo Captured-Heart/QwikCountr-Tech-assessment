@@ -15,17 +15,28 @@ export './utils/app_fontweight.dart';
 export './utils/brand_colors.dart';
 export './utils/show_top_bar.dart';
 export './utils/custom_snack_bar.dart';
+export './utils/connectivity.dart';
+export './utils/snack_bar.dart';
+export './utils/dialogs.dart';
+export './utils/util_date_picker.dart';
+export 'strings_const.dart';
 
-// START SCREENS
-export './start screens/views/onboard_screen.dart';
-export './start screens/views/splash_screen.dart';
-export './start screens/widgets/onboarding_indicator.dart';
-export './start screens/widgets/onboarding_pages_widget.dart';
 
 // MAIN SCREEN
 export 'mainscreen/views/mainscreen.dart';
 export 'mainscreen/widgets/stocks_card_widgets.dart';
 export 'mainscreen/models/stocks_price_model.dart';
 export 'mainscreen/services/http_get_request.dart';
+export 'mainscreen/models/stocks_symbols_model.dart';
+export 'mainscreen/providers/fetch_symbols_provider.dart';
+export 'mainscreen/services/fetch_stocks_repo.dart';
+export 'mainscreen/providers/is_grid_provider.dart';
+export 'mainscreen/providers/fetch_stock_provider.dart';
+export 'mainscreen/widgets/stocks_list_grid_view_widget.dart';
+export 'mainscreen/widgets/rounded_main_btn.dart';
+export 'mainscreen/widgets/search_btn.dart';
+
+
 // AUTH SCREEN
 export './authscreen/views/login_screen.dart';
+

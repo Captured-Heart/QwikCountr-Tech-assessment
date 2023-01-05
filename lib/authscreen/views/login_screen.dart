@@ -35,14 +35,14 @@ class LoginScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        'Provide a name to continue',
+                        loginTitle,
                         textScaleFactor: 1.3,
                       ),
                       TextFormField(
                         controller: nameController,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'please complete field';
+                            return loginErrorText;
                           } else {
                             return '';
                           }
@@ -58,7 +58,7 @@ class LoginScreen extends StatelessWidget {
                             filled: true,
                             fillColor:
                                 Theme.of(context).scaffoldBackgroundColor,
-                            labelText: 'Name',
+                            labelText: name,
                             labelStyle: Theme.of(context)
                                 .textTheme
                                 .button
@@ -79,7 +79,7 @@ class LoginScreen extends StatelessWidget {
                             if (nameController.text.isNotEmpty) {
                               SharedPreferencesHelper.setPrefName(
                                   name: nameController.text);
-                              push(context, MainScreen());
+                              push(context, const MainScreen());
                             }
                           },
                           style: ElevatedButton.styleFrom(
@@ -88,7 +88,7 @@ class LoginScreen extends StatelessWidget {
                             side: BorderSide(
                                 color: Theme.of(context).primaryColorLight),
                           )),
-                          child: const Text('Login'),
+                          child: const Text(login),
                         ),
                       )
                     ]

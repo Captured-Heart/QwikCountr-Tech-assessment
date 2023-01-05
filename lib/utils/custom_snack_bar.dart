@@ -21,6 +21,7 @@ class CustomSnackBar extends StatefulWidget {
     this.textStyle,
   }) : super(key: key);
 
+//
   const CustomSnackBar.success({
     Key? key,
     required this.message,
@@ -75,6 +76,8 @@ class CustomSnackBar extends StatefulWidget {
   CustomSnackBarState createState() => CustomSnackBarState();
 }
 
+
+// HERE, I BUILT A CUSTOM SNACK BAR THAT I CAN USE AROUND MY PROJECT
 class CustomSnackBarState extends State<CustomSnackBar> {
   @override
   Widget build(BuildContext context) {

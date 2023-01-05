@@ -1,6 +1,10 @@
 import '../../app.dart';
 
-SizedBox stocksGridTileCard(Size size, BuildContext context) {
+SizedBox stocksGridTileCard({
+  required Size size,
+  required BuildContext context,
+  required StocksPriceModel data,
+}) {
   return SizedBox(
     width: size.width * 0.45,
     child: Card(
@@ -15,33 +19,47 @@ SizedBox stocksGridTileCard(Size size, BuildContext context) {
       child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisSize: MainAxisSize.min,
-          children: const [
+          children: [
             ListTile(
               minLeadingWidth: 1,
               minVerticalPadding: 2,
-              contentPadding: EdgeInsets.only(left: 10),
+              contentPadding: const EdgeInsets.only(left: 10),
               horizontalTitleGap: 10,
-              leading: CircleAvatar(
+              leading: const CircleAvatar(
                 radius: 17,
                 child: Icon(
                   Icons.account_balance_rounded,
                   size: 18,
                 ),
               ),
-              title: Text('Nvidia'),
-              subtitle: Text('Nvidia inc.'),
+              title: Text(data.exchange!),
+              subtitle: Text(data.symbol!),
             ),
             ListTile(
-              title: Text('\$98.90'),
-              subtitle: Text('178% [0.1786]'),
-              trailing: Icon(Icons.sports_hockey_sharp),
+              title: Text(
+                '${data.open}'.toString(),
+                style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                      color: BrandColors.colorGreen,
+                    ),
+              ),
+              subtitle: Text(
+               '${ data.close}'.toString(),
+                style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                      color: BrandColors.colorError,
+                    ),
+              ),
+              trailing: const Icon(Icons.sports_hockey_sharp),
             )
           ]),
     ),
   );
 }
 
-Card stocksListTileCard(Size size, BuildContext context) {
+Card stocksListTileCard({
+  required Size size,
+  required BuildContext context,
+  required StocksPriceModel data,
+}) {
   return Card(
     margin: EdgeInsets.symmetric(
         horizontal: size.width * 0.04, vertical: size.height * 0.01),
@@ -61,18 +79,30 @@ Card stocksListTileCard(Size size, BuildContext context) {
       ),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
-          Text('Nvidia'),
-          Text('Nvidia'),
-          Text('Nvidia'),
+        children: [
+          Text(data.exchange ?? 'Nvidia'),
+          Text(
+            'Open: ${data.open}',
+            style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                  color: BrandColors.colorGreen,
+                ),
+          ),
+          Text('high: ${data.high}',
+              style: Theme.of(context).textTheme.bodyText2),
         ],
       ),
       subtitle: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
-          Text('Nvidia Inc.'),
-          Text('Nvidia Inc.'),
-          Text('Nvidia Inc.'),
+        children: [
+          Text('${data.symbol}'),
+          Text(
+            'Close: ${data.close}',
+            style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                  color: BrandColors.colorError,
+                ),
+          ),
+          Text('low: ${data.low}',
+              style: Theme.of(context).textTheme.bodyText2),
         ],
       ),
     ),
