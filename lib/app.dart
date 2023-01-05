@@ -1,7 +1,6 @@
 //LIST OF PACKAGES USED
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:flutter/material.dart';
-export 'package:smooth_page_indicator/smooth_page_indicator.dart';
 export 'package:flex_color_scheme/flex_color_scheme.dart';
 export 'package:google_fonts/google_fonts.dart';
 export 'package:flutter_riverpod/flutter_riverpod.dart';
