@@ -4,10 +4,15 @@
   <h1>QwikCountr Demo</h1>
   <strong>A Flutter app that displays stock market data and allows users to track their favorite stocks.</strong>
   <br />
-  <sub>Built by <a href="https://twitter.com/CapturedWarrior">Captured-Heart</a></sub>
-  <br />
-</div>
 
+  <h3>You can download the apk directly from my firebase distribution console <a href="  https://appdistribution.firebase.dev/i/e5a7b73fefe2dd61
+">QwikCountr-Demo</a></ </h3>
+  <br />
+
+<sub>Built by <a href="https://twitter.com/CapturedWarrior">Captured-Heart</a></sub>
+<br />
+
+</div>
 
 ## Tasks for the assessment
 
@@ -66,7 +71,7 @@
 
 ## Tools
 
-- [flex_color_scheme: by my friend SuperMike](https://pub.dev/packages/flex_color_scheme ) visit his website: [rydMike.com](rydmike.com)
+- [flex_color_scheme: by my friend SuperMike](https://pub.dev/packages/flex_color_scheme) visit his website: [rydMike.com](rydmike.com)
 - [flutter_native_splash](https://pub.dev/packages/flutter_native_splash)
 - [shared_preferences](https://pub.dev/packages/shared_preferences)
 - [internet_connection_checker: This was really helpful in checking for failed internet connection](https://pub.dev/packages/internet_connection_checker)
@@ -76,4 +81,4 @@ For a full description of OSS used, see pubspec.yaml
 
 # Credits
 
-Stock data provided, and you can also generate your own Api keys on  [MarketstackAPI](https://marketstack.com/)
+Stock data provided, and you can also generate your own Api keys on [MarketstackAPI](https://marketstack.com/)

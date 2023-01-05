@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "747815550281",
+    "project_id": "qwikcountr-demo",
+    "storage_bucket": "qwikcountr-demo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:747815550281:android:8df91ac68a158bb5eaee98",
+        "android_client_info": {
+          "package_name": "com.example.qwikcountr_tech_assessment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "747815550281-nql24ivbeh34rr9pqehvb9003joc3ic8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTRdU5Pp_PEUu1y4bMGWg-pLyKeuJQRVo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "747815550281-nql24ivbeh34rr9pqehvb9003joc3ic8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
