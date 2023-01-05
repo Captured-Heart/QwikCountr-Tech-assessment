@@ -21,7 +21,6 @@ export './utils/dialogs.dart';
 export './utils/util_date_picker.dart';
 export 'strings_const.dart';
 
-
 // MAIN SCREEN
 export 'mainscreen/views/mainscreen.dart';
 export 'mainscreen/widgets/stocks_card_widgets.dart';
@@ -35,8 +34,7 @@ export 'mainscreen/providers/fetch_stock_provider.dart';
 export 'mainscreen/widgets/stocks_list_grid_view_widget.dart';
 export 'mainscreen/widgets/rounded_main_btn.dart';
 export 'mainscreen/widgets/search_btn.dart';
-
+export 'mainscreen/widgets/exchanges_tab.dart';
 
 // AUTH SCREEN
 export './authscreen/views/login_screen.dart';
-

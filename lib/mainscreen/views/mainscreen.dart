@@ -32,16 +32,12 @@ class MainScreenState extends ConsumerState<MainScreen> {
         switch (event) {
           case InternetConnectionStatus.connected:
             topSnack(
-                context: context,
-                message: internetHealthy,
-                isError: false);
+                context: context, message: internetHealthy, isError: false);
             log('Data connection is available.');
             break;
           case InternetConnectionStatus.disconnected:
             topSnack(
-                context: context,
-                message: internetUnhealthy,
-                isError: true);
+                context: context, message: internetUnhealthy, isError: true);
 
             log(internetUnhealthy);
             break;
@@ -98,44 +94,11 @@ class MainScreenState extends ConsumerState<MainScreen> {
             padding: const EdgeInsets.all(12.0),
             child: Column(
               children: [
-                TabBar(
-                  isScrollable: true,
-                  labelColor: Theme.of(context).primaryColorLight,
-                  indicator: BoxDecoration(
-                    color: Colors.transparent,
-                    border: Border.all(
-                      color: Theme.of(context).primaryColorLight,
-                    ),
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  splashFactory: NoSplash.splashFactory,
-                  overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                    (states) => states.contains(MaterialState.selected)
-                        ? null
-                        : Colors.transparent,
-                  ),
-                  onTap: (value) {
-                    log(value.toString());
-                  },
-
-                  // THE TABS REP THE LIST FETCHED FROM EXCHANGES/COMPANIES FROM THE MARKETSTACK API
-                  tabs: List.generate(
-                    symbolsLength,
-                    (index) => InkWell(
-                      radius: 150,
-                      onTap: () async {
-                        log(symbols.value![index].symbol!);
-                        ref
-                            .read(symbolsForStocksProvider.notifier)
-                            .update((state) => symbols.value![index].symbol!);
-                            
-                        ref.invalidate(fetchStocksProvider(ref));
-                      },
-                      child: Tab(
-                          text: symbols.value?[index].symbol ?? 'Loading...'),
-                    ),
-                    growable: true,
-                  ),
+                exchangesTab(
+                  context,
+                  symbols,
+                  symbolsLength,
+                  ref,
                 ),
 
                 Padding(
@@ -144,7 +107,7 @@ class MainScreenState extends ConsumerState<MainScreen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       const Text(
-                       stockMarket,
+                        stockMarket,
                         textScaleFactor: 1.4,
                       ),
                       const Spacer(),
@@ -155,7 +118,7 @@ class MainScreenState extends ConsumerState<MainScreen> {
                                 context: context, setState: setState, ref: ref);
                           },
                           child: roundedMainBTN(
-                            message:pickDate,
+                            message: pickDate,
                             icon: Icons.calendar_month,
                           )),
 

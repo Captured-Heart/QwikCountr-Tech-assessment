@@ -79,7 +79,7 @@ class LoginScreen extends StatelessWidget {
                             if (nameController.text.isNotEmpty) {
                               SharedPreferencesHelper.setPrefName(
                                   name: nameController.text);
-                              push(context, const MainScreen());
+                              pushReplacement(context, const MainScreen());
                             }
                           },
                           style: ElevatedButton.styleFrom(
