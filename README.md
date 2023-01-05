@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./assets/logo.png" style="margin: auto;display: block;width: 10.5%" />
+  <img src="./assets/logo.png" style="margin: auto;display: block;width: 4.5%" />
   <br />
   <h1>QwikCountr Demo</h1>
   <strong>A Flutter app that displays stock market data and allows users to track their favorite stocks.</strong>
