@@ -12,12 +12,6 @@
 
 </div>
 
-## Tasks for the assessment
-
-- ✅ Use the [marketstack API](marketstack.com), build an app that shows the stock market report of 10 random companies
-- ⚠️ Add a date range and auto complete search box (Intentional left it out, until i am sure i am not being fooled)
-- ✅ Notify the user if the device is offline
-- ✅ Add a production-grade README.md file
 
 # Features
 
